@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Find</title>
+	<link rel="stylesheet" type="text/css" href="CSS/main.css">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<!--
+	<script type="text/javascript" src="JS/geolocation.js"></script>-->
+</head>
+<body>
+	<header>
+		<h1 class="logo">par<span id="last-letter">q</span></h1>
+		<input type="checkbox" id="nav-toggle" class="nav-toggle">
+		<nav>
+			<ul>
+				<li class="inactive">find</li>
+				<li><a href="submission.html">create</a></li>
+				<li><a href="#">about</a></li>
+				<li><a href="#">login</a></li>
+				<li><a href="register.html">register</a></li>
+			</ul>
+		</nav>
+		<label for="nav-toggle" class="nav-toggle-label">
+			<span></span>
+		</label>
+	</header>
+	<h1 class="title">Find The Perfect Spot.</h1>
+	<p class="description">Please select any relevant filters.</p>
+	<form class="search">
+		<div class="row">
+			<label for="location">Location</label>
+			<button type="button" id="location-button" onclick="getLocation()"><i class="material-icons">person_pin_circle</i></button>
+			<input type="text" id="location" placeholder="Your Destination...">
+		</div>
+		<div class="row">
+			<label for="distance">Parking Spots Within...</label>
+			<select id="distance">
+				<option value="1km">1 kilometer</option>
+				<option value="5km">5 kilometers</option>
+				<option value="10km">10 kilometers</option>
+				<option value="15km">15 kilometers</option>
+				<option value=">15km">>15 kilometers</option>
+			</select>
+		</div>
+		<div class="row">
+			<fieldset>
+				<legend>Weekly Price Range</legend>
+				<label class="price-label" for="min">Min</label>
+				<input id="min" type="number" placeholder="$" step="any" min="0">
+				<label class="price-label" for="max">Max</label>
+				<input id="max" type="number" placeholder="$" step="any" min="0">
+			</fieldset>
+		</div>
+		<div class="row">
+			<div class="rate">
+				<p class="min-rate">Minimum Rating</p>
+				<input type="radio" id="star5" name="rate" value="5">
+				<label for="star5" title="text">5 stars</label>
+				<input type="radio" id="star4" name="rate" value="4">
+				<label for="star4" title="text">4 stars</label>
+				<input type="radio" id="star3" name="rate" value="3">
+				<label for="star3" title="text">3 stars</label>
+				<input type="radio" id="star2" name="rate" value="2">
+				<label for="star2" title="text">2 stars</label>
+				<input type="radio" id="star1" name="rate" value="1">
+				<label for="star1" title="text">1 star</label>
+			</div>
+		</div>
+	</form>
+	<form class="search" method="GET" action="results.html">
+		<button type="submit" class="submit">Search</button>
+	</form>
+
+  	<!-- FOOTER -->
+    <footer>
+      <p>&copy; 2018 Balas Enterprises &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+    </footer>
+    <script src="JS/main.js"></script>
+</body>
+</html>
