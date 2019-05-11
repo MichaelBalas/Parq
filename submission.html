@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Create</title>
+	<link rel="stylesheet" type="text/css" href="CSS/main.css">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body onload="getLocation()">
+	<header>
+		<h1 class="logo">par<span id="last-letter">q</span></h1>
+		<input type="checkbox" id="nav-toggle" class="nav-toggle">
+		<nav>
+			<ul>
+				<li><a href="search.html">find</a></li>
+				<li class="inactive">create</li>
+				<li><a href="#">about</a></li>
+				<li><a href="#">login</a></li>
+				<li><a href="register.html">register</a></li>
+			</ul>
+		</nav>
+		<label for="nav-toggle" class="nav-toggle-label">
+			<span></span>
+		</label>
+	</header>
+	<h1 class="title">Mark Your Spot.</h1>
+	<p class="description">Please complete the details below to make your listing available.</p>
+	<form class="register" name="Submission" onsubmit="return validateCreation()" method="post">
+		<div class="row">
+			<label for="title">Title<span class="last-star">*</span></label>
+			<input name="title" type="text" placeholder="Name Your Spot" id="title" maxlength="50" required>
+		</div>
+		<div class="row">
+			<label for="desc">Description</label>
+			<textarea name="desc" id="desc" placeholder="Include any relevant information (max 500 chars)" maxlength="500"></textarea>
+		</div>
+		<div class="row">
+			<label for="set-price">Weekly Price<span class="last-star">*</span></label>
+			<input name="price" type="number" id="set-price" placeholder="$" step="any" min="0" required>
+		</div>
+		<div class="row">
+			<fieldset>
+				<legend>Location<span class="last-star">*</span></legend>
+				<label class="loc-label" for="lat">Latitude</label>
+				<input name="latitude" id="lat" type="number" step="any" placeholder="-90 to 90" required>
+				<label class="loc-label" for="lon">Longitude</label>
+				<input name="longitude" id="lon" type="number" step="any" placeholder="-180 to 180" required>
+			</fieldset>
+		</div>
+		<div class="row">
+			<label for="img">Upload Image</label>
+			<input name="upload_image" type="file" id="img" />
+		</div>
+		<div class="row">
+			<label for="video">Upload Video</label>
+			<input name="upload_video" type="file" id="video" />
+		</div>
+		<input type="submit" class="submit"/>
+	</form>
+
+	<!-- FOOTER -->
+	<footer>
+		<p>&copy; 2018 Balas Enterprises &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+	</footer>
+	<script src="JS/createSpot.js"></script>
+</body>
+</html>
