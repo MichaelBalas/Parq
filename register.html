@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Register</title>
+	<link rel="stylesheet" type="text/css" href="CSS/main.css">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+	<header>
+		<h1 class="logo">par<span id="last-letter">q</span></h1>
+		<input type="checkbox" id="nav-toggle" class="nav-toggle">
+		<nav>
+			<ul>
+				<li><a href="search.html">find</a></li>
+				<li><a href="submission.html">create</a></li>
+				<li><a href="#">about</a></li>
+				<li><a href="#">login</a></li>
+				<li class="inactive">register</li>
+			</ul>
+		</nav>
+		<label for="nav-toggle" class="nav-toggle-label">
+			<span></span>
+		</label>
+	</header>
+
+	<h1 class="title">Create Account.</h1>
+	<p class="description">Please fill in this form to create an account.</p>
+	<form name="Register" onsubmit="return validateInput()" method="post">
+		<div class="row">
+			<label for="name">Full Name<span class="last-star">*</span></label>
+			<input type="text" name="name" placeholder="Enter first and last name" id="name" required>
+		</div>
+		<div class="row">
+			<label for="email">Email<span class="last-star">*</span></label>
+			<input type="email" name="email" placeholder="Enter Email" id="email" required>
+		</div>
+		<div class="row">
+			<label for="pswd">Password<span class="last-star">*</span></label>
+			<input type="password" name="pswd" placeholder="Enter Password" id="pswd" required>
+			<!-- Hidden class is only readable by screen readers (since placeholder text is not screen readable) -->
+			<label for="pswd-repeat" class="visually-hidden">Repeat Password</label>
+			<input type="password" name="pswd-repeat" placeholder="Repeat Password" id="pswd-repeat" required>
+		</div>
+		<div class="row">
+			<label for="img">Upload Profile Picture</label>
+			<input type="file" name="profile_pic" id="img" accept="image/*"/>
+		</div>
+		<div class="terms">
+			<label><input type="checkbox" id="agree-to-terms" required>By creating an account you agree to our <a href="#">Terms & Conditions<span class="last-star">*</span></a></label>
+		</div>
+		<button type="submit" class="submit">Register</button>
+	</form>
+	<div class="container-signin">
+		<p>Already have an account? <a href="search.html">Login</a></p>
+	</div>
+	<!-- FOOTER -->
+	<footer>
+		<p>&copy; 2018 Balas Enterprises &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+	</footer>
+	<script src="JS/validateRegistration.js"></script>
+</body>
+</html>
+
