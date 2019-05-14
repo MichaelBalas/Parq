@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<!-- og namespace refers to the Open Graph Protocol, while the fb
+namespace refers to Facebook's own Open Graph specification-->
+<html prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#">
+<head>
+	<title>Parking Spot</title>
+	<link rel="stylesheet" type="text/css" href="CSS/main.css">
+	<meta charset="UTF-8">
+	<!-- Responsive Web Design that follows the screen-width of the device and sets the initial zoom level when the page is first loaded by the browser-->
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<!--//////////////////!!! Meta-Data !!!\\\\\\\\\\\\\\\\\\-->
+	<!-- Open Graph Protocol -->
+	<!-- Product Type: Generally used for e-commerce product sites -->
+	<meta property="og:type" content="product">
+	<!-- Title for the preview -->
+	<meta property="og:title" content="Luxurious Parking Garage">
+	<!-- Defines the website name/brand -->
+	<meta property="og:site_name" content="parq">
+	<!-- Similar to the canonical link -->
+	<meta property="og:url" content="parking.html">
+	<!-- Shared conent excerpt -->
+	<meta property="og:description" content="Park in style in this luxury garage conveniently located near McMaster University. With impenetrable security and professional valet service offered 24/7, we go to great lengths ensuring your daily commute begins and ends in style.">
+	<!-- Visually represent the content -->
+	<meta property="og:image" content="images/lux_park_garage_large.jpg">
+	<!-- Description of what is in the image (not a caption) -->
+	<meta property="og:image:alt" content="Luxury garage with expensive cars and paintings on the wall.">
+	<!-- Specifies other URLs to keep users engaged -->
+	<meta property="og:see_also" content="search.html">
+	<meta property="og:see_also" content="register.html">
+
+	<!-- Twitter Cards -->
+	<!-- Note: If there is no twitter-specific property, the card processor
+	falls back to the supported Open Graph property. -->
+	<!-- Specifies 'summary' card type -->
+	<meta name="twitter:card" content="summary">
+	<!-- @username for the website used in the card footer -->
+	<meta name="twitter:site" content="@parq">
+	<!-- Concise Title -->
+	<meta name="twitter:title" content="Luxurious Parking Garage">
+	<!-- Summarizes content appropriately for tweet -->
+	<meta name="twitter:description" content="Park in style in this luxury garage conveniently located near McMaster University. With impenetrable security and professional valet service offered 24/7, we go to great lengths ensuring your daily commute begins and ends in style.">
+	<!-- Cropped to square image (i.e. aspect ratio 1:1) -->
+	<meta name="twitter:image" content="images/lux_park_garage_large.jpg">
+	<!-- Text description of the image for those that are visually impaired -->
+	<meta name="twitter:image:alt" content="Luxury garage with expensive cars and paintings on the wall.">
+
+	<!-- Configuration for iOS Home Screen-->
+	<!-- Setting the Application Icon -->
+	<link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+	<!-- Setting the Splash Screen -->
+	<link rel="apple-touch-startup-image" href="images/splash.png">
+	<!-- Make the Application Full Screen (i.e. remove default Apple toolbars/menubars) -->
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<!-- Setting the Status Bar Style to solid black -->
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+	<link rel="mask-icon" href="images/safari-pinned-tab.svg" color="#5bbad5">
+
+	<!-- Configuration for Android Home Screen-->
+	<!-- Linking to the manifest -->
+	<link rel="manifest" href="manifest.json">
+	<!-- Supporting homescreen-installed apps prior to Chrome 39 -->
+	<meta name="mobile-web-app-capable" content="yes">
+	<link rel="icon" sizes="192x192" href="images/android-chrome-192x192.png">
+	<link rel="icon" sizes="512x512" href="images/android-chrome-512x512.png">
+
+	<!-- Mapbox -->
+	<script src='https://api.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.js'></script>
+	<link href='https://api.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.css' rel='stylesheet' />
+
+</head>
+<body class="Parking">
+	<header>
+		<h1 class="logo">par<span id="last-letter">q</span></h1>
+		<input type="checkbox" id="nav-toggle" class="nav-toggle">
+		<nav>
+			<ul>
+				<li><a href="search.html">find</a></li>
+				<li><a href="submission.html">create</a></li>
+				<li><a href="#">about</a></li>
+				<li><a href="#">login</a></li>
+				<li><a href="register.html">register</a></li>
+			</ul>
+		</nav>
+		<label for="nav-toggle" class="nav-toggle-label">
+			<span></span>
+		</label>
+	</header>
+	<!--//////////////////!!! Micro-Data !!!\\\\\\\\\\\\\\\\\\-->
+	<!-- itemscope specifies that the HTML contained within this div is about a particular item. The type of item is specified with itemtype (in this case, a place) -->
+	<div itemscope itemtype="http://schema.org/Place">
+		<div class="left-half">
+			<!-- itemprop labels properties of an item -->
+			<img itemprop="photo" src="images/lux_park_garage_large.jpg" alt="Luxurious parking garage" class="main_pic">
+		</div>
+		<div class="right-half">
+			<h1 class="parking-title"><span itemprop="name">Luxurious Parking Garage</span></h1>
+			<p id="by">By: <a href="#">John Smith</a></p>
+			<p id="price">Weekly Price: <strong>$31.99</strong></p>
+			<p id="spots">Spots Available: <strong><span itemprop="maximumAttendeeCapacity">2</span></strong></p> 
+			<p id="parking-desc_head">Description</p>
+			<p id="parking-desc"><span itemprop="description">Park in style in this luxury garage conveniently located near McMaster University. With impenetrable security and professional valet service offered 24/7, we go to great lengths ensuring your daily commute begins and ends in style.</span></p>
+			<!--<img src="images/lux_map.png" alt="Parking Map" id="result_map">-->
+			<div id="small-map"></div>
+			<!-- In this case, the value of the item property is itself another item with its own set of properties. geo is an item of type GeoCoordinates, which has the properties longitude and latitude-->
+			<div id="result_map_details" itemprop="geo" itemscope itemtype="http://schema.org/GeoCoordinates">
+				<p>Latitude: 43.255628</p>
+				<p>Longitude: -79.921361</p>
+				<p>Located: 0.24km away</p>
+			</div>
+		</div>
+		<script>
+			document.getElementById("result_map_details").insertAdjacentHTML('beforeend', '<meta itemprop="latitude" content="' + latitude + '" />')
+			document.getElementById("result_map_details").insertAdjacentHTML('beforeend', '<meta itemprop="longitude" content="' + longitude + '" />')
+		</script>
+		<!-- Scorecard displaying aggregate user ratings in a histogram-like format -->
+		<div id="scorecard" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
+			<h1 class="user">User Rating</h1>
+			<p class="average"><span itemprop="ratingValue">4.2</span> average based on <span itemprop="reviewCount">117</span> reviews.</p>
+			<hr style="border: 3px solid #ccc">
+			<div class="score-row">
+				<div class="side">
+					<div>5 star</div>
+				</div>
+				<div class="middle">
+					<div class="bar-container">
+						<div class="bar-5"></div>
+					</div>
+				</div>
+				<div class="side right">
+					<div>56</div>
+				</div>
+				<div class="side">
+					<div>4 star</div>
+				</div>
+				<div class="middle">
+					<div class="bar-container">
+						<div class="bar-4"></div>
+					</div>
+				</div>
+				<div class="side right">
+					<div>42</div>
+				</div>
+				<div class="side">
+					<div>3 star</div>
+				</div>
+				<div class="middle">
+					<div class="bar-container">
+						<div class="bar-3"></div>
+					</div>
+				</div>
+				<div class="side right">
+					<div>9</div>
+				</div>
+				<div class="side">
+					<div>2 star</div>
+				</div>
+				<div class="middle">
+					<div class="bar-container">
+						<div class="bar-2"></div>
+					</div>
+				</div>
+				<div class="side right">
+					<div>2</div>
+				</div>
+				<div class="side">
+					<div>1 star</div>
+				</div>
+				<div class="middle">
+					<div class="bar-container">
+						<div class="bar-1"></div>
+					</div>
+				</div>
+				<div class="side right">
+					<div>8</div>
+				</div>
+			</div>
+		</div>
+		<div class="reviews">
+			<h1 class="user">Top Customer Reviews</h1>
+			<div class="rev-container" itemprop="review" itemscope itemtype="http://schema.org/Review">
+				<img src="images/reviewer_1.jpg" alt="Avatar">
+				<p class="name"><span itemprop="author">Elon Musk</span></p>
+				<div itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating">
+					<!-- Provided for unambiguity: lowest is assumed to be one -->
+					<meta itemprop="worstRating" content="1">
+					<!-- Provided for unambiguity: highest is assumed to be five -->
+					<meta itemprop="bestRating" content="5">
+					<p class="stars"><span itemprop="ratingValue">2 Stars</span></p>
+					<p class="review"><span itemprop="description">Can't fit any of my falcon rockets. There aren't even any charging stations for my Tesla Roadster. The managers wouldn't let me drill under the garage.</span></p>
+				</div>
+			</div>
+			<div class="rev-container" itemprop="review" itemscope itemtype="http://schema.org/Review">
+				<img src="images/reviewer_2.jpg" alt="Avatar">
+				<p class="name"><span itemprop="author">Jeff Bezos</span></p>
+				<div itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating">
+					<meta itemprop="worstRating" content="1">
+					<meta itemprop="bestRating" content="5">
+					<p class="stars"><span itemprop="ratingValue">5 Stars</span></p>
+					<p class="review"><span itemprop="description">The perfect location for Amazon deliveries! Now I just need to convince them about the drones...</span></p>
+				</div>
+			</div>
+			<div class="rev-container" itemprop="review" itemscope itemtype="http://schema.org/Review">
+				<img src="images/reviewer_3.jpg" alt="Avatar">
+				<p class="name"><span itemprop="author">Bill Gates</span></p>
+				<div itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating">
+					<meta itemprop="worstRating" content="1">
+					<meta itemprop="bestRating" content="5">
+					<p class="stars"><span itemprop="ratingValue">3 Stars</span></p>
+					<p class="review"><span itemprop="description">Not enough windows in the garage.</span></p>
+				</div>
+			</div>
+			<div class="rev-container" itemprop="review" itemscope itemtype="http://schema.org/Review">
+				<img src="images/reviewer_4.jpg" alt="Avatar">
+				<p class="name"><span itemprop="author">Larry Ellison</span></p>
+				<div itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating">
+					<meta itemprop="worstRating" content="1">
+					<meta itemprop="bestRating" content="5">
+					<p class="stars"><span itemprop="ratingValue">4 Stars</span></p>
+					<p class="review"><span itemprop="description">They've got some kickass samurai armor on display.</span></p>
+				</div>
+			</div>
+			<a href="#">See all reviews...</a>
+		</div>
+	</div>
+	<div class="video">
+		<h1 class="user">Sample Video (Task 2)</h1>
+		<!-- controls tag adds video controls like play, pause and volume -->
+		<video controls>
+			<source src="videos/lux_park_garage.mp4" type="video/mp4">
+			<!-- Text below will be displayed in browsers that do not support the <video> element -->
+			Your browser does not support the video tag.
+		</video>
+	</div>
+	<div class="picture">
+		<h1 class="user">Sample Picture (Task 2)</h1>
+		<picture>
+			<!-- srcset has a comma-delimited list of image file paths with pixel density descriptors -->
+			<!-- media accepts any valid media query (normally found in css) -->
+			<source srcset="images/car_1x.png, images/car_2x.png 2x" media="(max-width: 700px)">
+			<!-- img used as fallback in case browser does not support <picture>. It is required. Location where alt is placed -->
+			<img src="images/wide_car_1x.png" srcset="images/wide_car_1x.png, images/wide_car_2x.png 2x" alt="Orange McLaren" style="width:100%;">
+		</picture>
+	</div>
+	<!-- FOOTER -->
+    <footer>
+      <p>&copy; 2018 Balas Enterprises &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+    </footer>
+    <script src="JS/parking_page.js"></script>
+</body>
+</html>
