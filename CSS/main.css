@@ -1,0 +1,914 @@
+@import url('https://fonts.googleapis.com/css?family=Work+Sans:300,600');
+
+/* Include padding and border in every element's total width and height*/
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden; /* Clip content with no scrolling mechanism*/
+  background: white;
+  font-family: 'Work Sans', sans-serif;
+  font-weight: 400;
+  min-height: 200px;
+  height: auto;
+  text-align: center;
+}
+
+/* Display Title Heading */
+h1.title {
+  font-size: 3em;
+  padding-top: 100px;
+}
+
+/* Display Title Heading for Results Page */
+h1.results-title {
+  font-size: 2.5em;
+  padding-top: 100px;
+}
+
+/* Display Title Heading for Parking Example Page */
+h1.parking-title {
+  padding-top: 90px;
+  font-size: 3vw; /* 1vw is relative to 1% of the width of the viewport */
+  margin-bottom: 3px;
+}
+
+/* Show Tabular results on right side of page (map on left) */
+.right-results {
+  float: right; /* Results float to right of container*/
+  width: 50%; /* Takes up 50% of containing block */
+}
+
+#map {
+  position: fixed;
+  width: 50%;
+  top: 81px;
+  bottom: 0;
+  text-align: initial;
+}
+/*
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden; 
+  background: white;
+  font-family: 'Work Sans', sans-serif;
+  font-weight: 400;
+  min-height: 200px;
+  height: auto;
+  text-align: center;
+  */
+/*** Marker tweaks ***/
+.mapboxgl-popup-close-button {
+  display: none;
+}
+
+.mapboxgl-popup-content {
+  padding: 0;
+  width: 260px;
+}
+
+.mapboxgl-popup-content-wrapper {
+  padding: 1%;
+}
+
+.mapboxgl-popup-content h3 {
+  background: black;
+  text-align: center;
+  color: white;
+  display: block;
+  border-radius: 3px 3px 0 0;
+  padding: 10px;
+  width: 260px;
+  font-weight: 700;
+  font-size: 14pt;
+  margin: -10px 0 0 -10px;
+}
+
+.mapboxgl-popup-content h4 {
+  margin: 0;
+  display: block;
+  padding: 10px;
+  font-weight: 500;
+  font-size: 12pt;
+  text-align: center;
+}
+
+.mapboxgl-popup-content h5 {
+  margin: 0;
+  display: block;
+  padding: 0;
+  font-weight: 500;
+  font-size: 10pt;
+  text-align: center;
+}
+
+.mapboxgl-popup-content div {
+  padding: 10px;
+}
+
+.mapboxgl-container .leaflet-marker-icon {
+  cursor: pointer;
+}
+
+.mapboxgl-popup-anchor-top > .mapboxgl-popup-content {
+  margin-top: 15px;
+}
+
+.mapboxgl-popup-anchor-top > .mapboxgl-popup-tip {
+  border-bottom-color: #91c949;
+}
+
+.mapboxgl-popup {
+  padding-bottom: 5px;
+}
+
+#small-map {
+  position: relative;
+  width: 47%;
+  height: 13.45vw;
+  text-align: initial;
+  border-radius: 8px;
+  top: 0;
+}
+
+/* Align Parking Details next to Parking image */
+.right-half {
+  text-align: left;
+}
+
+img.main_pic {
+  margin: 100px 10px 0px 10px; /* top=100px, right=10px, bottom=0px, left=10px */
+  border-radius: 8px; /* Make corners of image slighlty rounded */
+  width: 50%;
+  float: left; /* Positioned on left side */
+}
+
+#result_map_details {
+  display: none;
+}
+
+/*   /// Parking Description ///   */
+#by {
+  font-size: 1vw;
+  margin-top: 0;
+}
+
+#price, #spots, #parking-desc_head {
+  font-size: 1.5vw;
+}
+
+#parking-desc_head {
+  margin-bottom: 3px;
+}
+
+#parking-desc {
+  margin-top: 0;
+  padding-top: 0;
+  font-size: 1.2vw;
+  padding-right: 20px;
+}
+
+
+div.row {
+  padding: 20px;
+  background-color: #F1F1F1; /* light gray */
+  font-size: 1.4em; /* Relative to the font size of the element - default for everything under row*/
+}
+
+/*   /// Parking Scorecard and Rating ///  */
+#scorecard {
+  clear: both; /* Don't allow elements on the left or right side of the scorecard*/
+  padding: 0;
+  padding-top: 15px; /* Don't allow any padding except on the top*/
+}
+
+/* User Rating and Top Customer Reviews Headings*/
+.user {
+  font-size: 2.5vw;
+  font-weight: 400;
+}
+
+/* Average rating based on X reviews*/
+.average {
+  font-size: 1.5vw;
+}
+
+/* // Three Column Layout // */
+/* Corresponds to either side of the scorecard bars (i.e. # of stars and # of raters) */
+.side {
+  float: left;
+  width: 15%;
+  margin-top: 10px;
+}
+
+/* Corresponding to bars in the middle of the scorecard */
+.middle {
+  margin-top: 10px;
+  float: left;
+  width: 70%;
+}
+
+/* Places text (# of reveiwers) to right of bars */
+.right {
+  text-align: left;
+  padding-left: 10px;
+}
+
+/* Clear floats after the columns */
+.score-row:after { /* inserts something after the content of selected elements */
+  content: ""; /* Doesn't insert anything (blank string) after each eleemnt*/
+  display: table; /* Let the element behave like a <table> element */
+  clear: both;
+}
+
+/* the bar container */
+.bar-container {
+  width: 100%; /* Corresponds to "100% or All Reviewers" */
+  background-color: #F1F1F1; /* light grey */
+  text-align: center;
+}
+
+/* Individual Bars (i.e. Percent Ratings for each Star) */
+.bar-5 { /* Five-Star Aggregate Rating */
+  width: 48%; /* (56 / 117) * 100 */
+  height: 18px; 
+  background-color: #66FF00; /* green */
+}
+.bar-4 { /* Four-Star Aggregate Rating */
+  width: 36%; /* (42 / 117) * 100 */
+  height: 18px; 
+  background-color: #CCFF00; /* greenish-yellowish colour */
+}
+.bar-3 { /* Three-Star Aggregate Rating */
+  width: 8%; /* (9 / 117) * 100 */
+  height: 18px; 
+  background-color: #FFCC00; /* Orange */
+}
+.bar-2 { /* Two-Star Aggregate Rating */
+  width: 2%; /* (2 / 117) * 100 */
+  height: 18px; 
+  background-color: #FF6600; /* Orangish-Reddish colour */
+}
+.bar-1 { /* One-Star Aggregate Rating */
+  width: 7%; /* (8 / 117) * 100 */
+  height: 18px; 
+  background-color: #FF0000; /* Red */
+}
+
+/* Style the reviews container with a rounded border, grey background
+and some padding and margin */
+.rev-container {
+  border: 2px solid #CCC; /* Dark grey */
+  background-color: #F1F1F1; /* light grey */
+  border-radius: 5px;
+  margin: 16px auto;
+  padding: 16px;
+  width: 75%;
+  text-align: left;
+}
+
+/* Clear floats after containers */
+.rev-container::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+/* Float images inside the container to the left. Add a right margin, and
+style the image as a circle */
+.rev-container img {
+  width: 110px;
+  float: left;
+  margin-right: 20px;
+  border-radius: 50%; /* Rounds border to circle */
+}
+
+/*   /// Review Attributes ///   */
+/* name of reviewer */
+.name {
+  font-size: 16pt;
+  margin: 0;
+  padding: 0;
+}
+
+/* Number of stars reviewer gave */
+.stars {
+  margin: 0;
+  padding: 0;
+  font-weight: bold;
+}
+
+/* Review Description */
+.review {
+  padding: 0;
+  text-align: left;
+  margin-bottom: 0;
+}
+
+/*   /// Bonus Assignment Task 2 Styling ///   */
+/* Made using the HTML5 <video> tag */
+video {
+  width: 75%; /* Make video same width as reviews */
+  height: auto;
+  border-radius: 5px; /* Give video outline rounded edge */
+}
+
+/*.  /// Results Gallary ///   */
+div.gallery {
+  position: relative; /* Positioned to its relative position */
+  border: 1px solid #CCC; /* Give each listing a dark grey border */
+}
+
+/* When hovering over a listing with mouse... */
+div.gallery:hover {
+    border: 1px solid #333; /* change border colour to light black */
+    box-shadow: 0 0 25px #CCC; /* add a dark grey shadow */
+}
+
+div.gallery img {
+    width: 100%; /* Each image should fit its bounding container */
+    height: auto;
+}
+
+/* Brief listing description/summary */
+div.desc {
+  padding: 0 10px 15px 10px; /* top, right, bottom, left */
+}
+
+/* Selects all h4 and p elements where div.desc is a parent element */
+div.desc > h4, div.desc > p {
+  text-align: left;
+  margin: 0;
+}
+
+/* Display price on parking image*/
+div.price {
+  position: absolute;
+  top: 0;
+  right: 0; /* top right corner */
+  font-size: 0.9em;
+  background-color: rgba(0,0,0,0.8); /* Slightly transparent black */
+  color: white;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+div.price > h4 {
+  margin: 6px;
+}
+
+.responsive-results {
+  padding: 6px 6px;
+  float: left;
+  width: 50%;
+}
+
+/*   /// Results Pagination ///   /*
+/* Pagination positioning */
+.pagination {
+  float: right;
+  width: 100%;
+  margin: 30px 0;
+}
+
+/* Pagination Links */
+.pagination a {
+  color: black;
+  padding: 4px 8px;
+  text-decoration: none;
+  transition: background-color .3s; /* Produces a fade effect */
+  font-size: 12pt;
+}
+
+/* Style the active/current pagination link */
+.pagination a.active {
+  background-color: black;
+  color: white;
+}
+
+/* Add a grey background color on mouse-over over inactive pages */
+.pagination a:hover:not(.active) {
+  background-color: #DDD;
+}
+
+/* If screen width falls below 930px... */
+@media screen and (max-width: 930px) {
+  /* Show only one listing per row, not two */
+  .responsive-results {
+    width: 100%;
+    margin: 6px 0;
+  }
+}
+
+/* General subheading for search, create and register pages */
+.description {
+  font-size: 1.2em;
+}
+
+/* subheading for results page */
+.results-description {
+  font-size: 0.8em;
+}
+
+/*   /// Style inputs ///   */
+input, label, legend, select, textarea {
+  width: 100%;
+}
+
+input, select {
+  max-width: 300px;
+  display: inline-block;
+  padding: 15px;
+  border: 1px solid #CCC; /* Dark grey */
+  border-radius: 4px;
+  font-size: 12pt;
+}
+
+input[type=file] {
+  max-width: 300px;
+  cursor: pointer; /* when going over "No File Chosen", cursor becomes pointer and indicates link/file to open*/
+  border: none;
+}
+
+input[type=checkbox] {
+  width: auto;
+  cursor: pointer; /* when going over checkbox, cursor becomes pointer and indicates link/file to open*/
+}
+
+select {
+  height: 50px;
+  background-color: white
+}
+
+textarea {
+  width: 100%;
+  max-width: 400px;
+  height: 150px;
+  padding: 10px;
+  border: 1px solid #CCC; /* Dark grey */
+  border-radius: 4px;
+  resize: none; /* Resizing won't be necessary due to character limit */
+  font-size: 12pt;
+}
+
+fieldset {
+  border: none;
+}
+
+#lat, #lon {
+  max-width: 200px;
+}
+
+#min, #max {
+  max-width: 240px;
+}
+
+/*   /// Style Focused Inputs ///   */
+/* When these elements have focus, give them a light blue 
+border and shadow */
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border: 1px solid #82D1FF; /* light blue */
+  box-shadow: 0 0 15px #82D1FF; /* light blue */
+}
+
+input[type=file]:focus {
+  outline: none;
+  border: none;
+  box-shadow: none;
+}
+
+input[type=checkbox]:checked {
+  outline: none;
+  border: 1px solid #82D1FF; /* light blue */
+  box-shadow: 0 0 15px #82D1FF; /* light blue */
+}
+
+/*   /// Style Labels ///   */
+label {
+  display: inline-block;
+  margin-bottom: 3px;
+}
+
+.loc-label, .price-label {
+  width: auto;
+  padding-left: 15px;
+  font-size: 0.9em;
+}
+
+.min-rate {
+  margin-bottom: 3px;
+  margin-top: 0;
+}
+
+/* Recommended style for visually hiding content that will be read by screen readers */
+.visually-hidden {
+  border: 0;
+  clip: rect(0 0 0 0); /* Clips the label */
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+#pswd {
+  margin: auto;
+  margin-bottom: 2px;
+  display: block;
+  max-width: 400px;
+}
+
+#pswd-repeat {
+  margin: auto;
+  margin-bottom: 2px;
+  display: block;
+  max-width: 400px;
+}
+
+/* Denotes required fields */
+.last-star {
+  color: red;
+}
+
+/* Terms and Conditions Text */
+.terms {
+  margin-top: 15px;
+  font-size: 1em;
+}
+
+/*   /// Style Minimum Search Rating /// */
+.rate {
+  display: inline-block;
+}
+
+.rate:not(:checked) > input {
+    position:absolute;
+    top:-9999px; /* hide text */
+}
+
+.rate:not(:checked) > label {
+    float: right;
+    width: 1em;
+    overflow: hidden;
+    white-space: nowrap; /* Sequences of whitespace will collapse into a single whitespace*/
+    cursor: pointer;
+    font-size: 35px;
+    color: #CCC;
+}
+
+.rate:not(:checked) > label:before {
+    content: '★'; /* Black Star */
+}
+
+.rate > input:checked ~ label {
+    color: #FFC700; /* Gold */    
+}
+
+.rate:not(:checked) > label:hover,
+.rate:not(:checked) > label:hover ~ label {
+    color: #DEB217; /* Darker Gold */ 
+}
+/* General (all siblings of specific element) and adjacent (adjacent siblings of specific element) sibling selectors */
+.rate > input:checked + label:hover,
+.rate > input:checked + label:hover ~ label,
+.rate > input:checked ~ label:hover,
+.rate > input:checked ~ label:hover ~ label,
+.rate > label:hover ~ input:checked ~ label {
+    color: #C59B08; /* Darkest Gold */
+}
+
+/*   /// Style Submit Button ///   */
+.submit {
+  background-color: black;
+  color: white;
+  font-size: 1.5em;
+  padding: 16px 20px;
+  margin-top: 20px;
+  margin-bottom: 8px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 350px;
+  opacity: 1.0;
+}
+
+.submit:hover {
+  box-shadow: 0 0 20px #82D1FF; /* light blue */
+  opacity: 0.9;
+}
+
+.submit:focus {
+  outline: none;
+}
+
+/*   /// Geolocation Button ///   */
+#location-button {
+  background-color: #82D1FF; /* light blue */
+  position: relative;
+  height: 50px;
+  width: 50px;
+  left: 8px;
+  top: 4px;
+  padding: 2px;
+  border: 1px solid #CCC; /* Dark grey */
+  border-radius: 4px;
+  font-size: 12pt;
+}
+
+#location-button:hover {
+  box-shadow: 0 0 5px #82D1FF; /* light blue */
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+#location-button:focus {
+  outline: none;
+}
+
+/* /// Sign-In /// */
+/* Set a grey background colour and center the text of the sign-in section */
+.container-signin {
+  margin-top: 15px;
+  padding: 5px 0;
+  background-color: #F1F1F1; /* Light grey */
+  text-align: center;
+}
+
+footer {
+  position: relative;
+  font-size: 10pt;
+  margin-top: 40px;
+}
+
+/* Footer for the results page. Stays on the middle left side
+on the bottom of */
+footer.results {
+  bottom: 0;
+  position: fixed;
+  float: right;
+  width: 50%;
+  font-size: 0.6em;
+}
+
+/* Add a blue text colour to links */
+a {
+  color: dodgerblue;
+}
+
+
+/*///////////// Navigation Bar (widescreen) /////////////*/
+header {
+  display: grid;
+  grid-template-columns: 100px auto minmax(550px, 20fr) 3fr; /* minmax defines a size ranger >= min and <= max; fr refers to fraction lengths */
+  justify-items: center; /* Default justify-self for all items of the box */
+  background: black;
+  text-align: center;
+  position: fixed;
+  z-index: 999; /* Highest stack order on the page */
+  width: 100%;
+  top: 0;
+}
+
+.logo {
+  color: white;
+  grid-column: 1 / 3; /* grid-column-start=1; grid-column-end=3;*/
+}
+
+/* Special Q - make last letter blue */
+#last-letter {
+  color: #82D1FF; /* lightblue */
+}
+/* Hide Toggle Bar for wide navigation header */
+.nav-toggle, .nav-toggle-label {
+  display: none;
+}
+
+nav {
+  grid-column: 3 / 4; /* grid-column-start=3; grid-column-end=4;*/
+  display: flex; /* block-level flex container */
+  justify-content: flex-end; /* positioned at the end of the container */
+  align-items: center;
+}
+
+nav ul {
+  display: flex;
+}
+
+nav li {
+  margin-left: 3em;
+  margin-bottom: 0;
+}
+
+nav a {
+  color: white;
+  text-decoration: none; /* Remove Underlines */
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-transform: uppercase; /* Make all letters uppercase */
+  position: relative;
+}
+
+/* Display format for inactive link */
+nav li.inactive {
+  color: #82D1FF; /* light blue */
+  text-decoration: none;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  position: relative;
+  list-style: none;
+}
+
+/* For each link in the nav bar, add blue bar above */
+nav a::before {
+  content: '';
+  display: block;
+  height: 4px;
+  background: #82D1FF; /* light blue */
+  position: absolute;
+  top: -0.75em;
+  left: 0;
+  right: 0;
+  transform: scale(0,1); /* Blue bar should only appear on hover */
+  transition: transform ease-in-out 250ms; /* Instead of just appearing, it should transition from center-side and back */
+}
+
+nav a:hover::before {
+  transform: scale(1,1); /* Blue bar should only appear on hover */
+}
+
+nav a:hover {
+  color: #82D1FF; /* light blue */
+}
+/*///////////// /////////////*/
+
+/* Responsive Layout - when the screen is less than 700px wide */
+@media screen and (max-width: 700px) {
+/*///////////// Navigation Bar (small-screen) /////////////*/
+  header {
+    display: block;
+  }
+
+  .nav-toggle {
+    position: absolute;
+  }
+
+  .nav-toggle:focus ~ .nav-toggle-label {
+    outline: 3px solid rgba(130, 209, 255, 0.75); /* Light blue at 75% opacity */
+  }
+
+  .nav-toggle-label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-left: 1em;
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+  /* Set toggle shape, colour and position */
+  .nav-toggle-label span,
+  .nav-toggle-label span::before,
+  .nav-toggle-label span::after {
+    display: block;
+    background: white;
+    height: 2px;
+    width: 2em;
+    border-radius: 2px;
+    position: relative;
+  }
+  /* Remove writing on toggle */
+  .nav-toggle-label span::before,
+  .nav-toggle-label span::after {
+    content: '';
+    position: absolute;
+  }
+  /* Set distance between toggle bars */
+  .nav-toggle-label span::before {
+    bottom: 7px;
+  }
+  .nav-toggle-label span::after {
+    top: 7px;
+  }
+  /* Styling of Drop-Down Navbar */
+  nav {
+    position: absolute;
+    text-align: left;
+    top: 100%;
+    left: 0;
+    justify-content: flex-start; /* Positioned at the beginning of the container */
+    background: black;
+    opacity: 0.85;
+    width: 100%;
+    transform: scale(1, 0);
+    transform-origin: top; /* Animation should start from the header */
+    transition: transform 400ms ease-in-out;
+  }
+
+  /* Drop-down navbar menu when clicking on toggle */
+  .nav-toggle:checked ~ nav {
+    transform: scale(1,1);
+  }
+
+  /* After dropping down navbar, show text */
+  .nav-toggle:checked ~ nav a {
+    opacity: 1;
+    transition: opacity 250ms ease-in-out 250ms;
+  }
+
+  nav ul {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    list-style: none; /* Remove bullet points */
+  }
+
+  /* Style NavBar List Item Links */
+  nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    opacity: 0; /* Prevents them from mushing together */
+    transition: opacity 150ms ease-in-out;
+  }
+
+  /* Set Spacing Between list items */
+  nav li {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    margin-left: 1em;
+  }
+
+  /* Don't allow blue bars to appear overhead */
+  nav a:hover::before {
+    transform: scale(0,1);
+  }
+
+  nav a:hover {
+    color: #82D1FF; /* lightblue */
+  }
+/*///////////// /////////////*/
+
+
+  /* Put min/max price and longitude/latitude inputs below
+  each other instead of side-to-side */
+  .loc-label, .price-label {
+    width: 100%;
+  }
+  /* Instead of staying on the left side, occupy 75% and top of parking page*/
+  img.main_pic {
+    float: none;
+    margin-top: 100px;
+    width: 75%;
+  }
+  /* Instead of staying on the right side, center on page */
+  .right-half {
+    text-align: center;
+  }
+  h1.parking-title {
+    padding: 0;
+    font-size: 1.5em;
+    margin: 0;
+  }
+  #by {
+    font-size: 0.25em;
+  }
+  #price, #spots, #parking-desc_head {
+    font-size: 1em;
+    margin: 0;
+  }
+  #parking-desc {
+    font-size: 0.75em;
+    margin: 0 auto;
+    width: 85%;
+  }
+  #small-map {
+    width: 75% !important;
+    height: 150px !important;
+    margin: 20px 12.5% 0px 12.5% !important;
+  }
+  #result_map_details {
+    display: none;
+  }
+  .user {
+    font-size: 1.25em;
+  }
+  .average {
+    font-size: 1.0em;
+  }
+  /* End of Responsive Properties */
+}
+
+
+
+
+
