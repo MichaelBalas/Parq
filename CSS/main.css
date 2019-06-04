@@ -18,6 +18,11 @@ html, body {
   text-align: center;
 }
 
+.error {
+  color: red !important;
+  font-size: 12pt !important;
+}
+
 /* Display Title Heading */
 h1.title {
   font-size: 3em;
@@ -905,6 +910,15 @@ nav a:hover {
   .average {
     font-size: 1.0em;
   }
+  /*   Geolocation Button */
+#location-button {
+  position: relative;
+  margin: 5px;
+  height: 40px;
+  width: 40px;
+  top: -1px;
+  left: 0;
+}
   /* End of Responsive Properties */
 }
 
