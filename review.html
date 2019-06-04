@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Review</title>
+	<link rel="stylesheet" type="text/css" href="CSS/main.css">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script>
+		function insertReviewResponse() {
+			if (this.status == 200) {
+				response = JSON.parse(this.response);
+				if (response.status == false) {
+					document.getElementById("errorplaceholder").innerHTML = "<span style='color:red;'><b>Error:</b> " + response.message + "</span>";
+				} else {
+					document.getElementById("reviewForm").innerHTML = "<p>Rating: " + response.rating + "</p>"
+					+ "<p>Review: " + response.review + "</p>";
+				}
+			}
+		}
+
+		function submitReviewForm() {
+			request = new XMLHttpRequest();
+			request.open("POST", "submit_review.php");
+			request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+			request.onload = insertReviewResponse;
+			var selector = document.getElementById("rating");
+			request.send("rating=" 
+				+ encodeURIComponent(selector[selector.selectedIndex].value)
+				+ "&review="
+				+ encodeURIComponent(document.getElementById("review").value));
+		}
+
+	</script>
+</head>
+<body>
+	<header>
+		<h1 class="logo">par<span id="last-letter">q</span></h1>
+		<input type="checkbox" id="nav-toggle" class="nav-toggle">
+		<nav>
+			<ul>
+				<li><a href="search.php">find</a></li>
+				<li><a href="submission.php">create</a></li>
+				<li><a href="logout.php">logout</a></li>
+				<li><a href="login.php">login</a></li>
+				<li><a href="register.php">register</a></li>
+			</ul>
+		</nav>
+		<label for="nav-toggle" class="nav-toggle-label">
+			<span></span>
+		</label>
+	</header>
+	<h1 class="title">Create Review.</h1>
+	<p class="description">Please fill in this form to create a review.</p>
+	<form id="reviewForm" name="Review" method="POST">
+		<div class="row">
+			<label for="rating">Rating<span class="last-star">*</span></label>
+			<select id="rating" name="rating">
+				<option value="" disabled selected hidden>Leave your rating...</option>
+				<option value="1">1 Star</option>
+				<option value="2">2 Stars</option>
+				<option value="3">3 Stars</option>
+				<option value="4">4 Stars</option>
+				<option value="5">5 Stars</option>
+			</select>
+		</div>
+		<div class="row">
+			<label for="review">Review<span class="last-star">*</span></label>
+			<textarea name="review" id="review" placeholder="Please limit your review to 500 characters."></textarea>
+			<br/><div id="errorplaceholder"></div>
+		</div>
+		<input type="button" class="submit" onclick="submitReviewForm()" value="Submit Review">
+	</form>
+</body>
+</html>
