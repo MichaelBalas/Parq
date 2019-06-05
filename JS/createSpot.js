@@ -18,8 +18,12 @@ function getLocation() {
 }
 
 function showPosition(position) {
-	document.getElementById("lat").value = position.coords.latitude;
-	document.getElementById("lon").value = position.coords.longitude;
+	if (document.getElementById("lat".value == null)) {
+		document.getElementById("lat").value = position.coords.latitude;
+	} 
+	if (document.getElementById("lon".value == null)) {
+		document.getElementById("lon").value = position.coords.longitude;
+	}
 }
 
 function showError(error) {
@@ -123,7 +127,7 @@ function isPriceValid(price) {
 	} else if (price.value.length == 0) {
 		alert('Please enter weekly price.');
 		return false;
-	} else if (/^\d+(.\d{2,})?$/.test(price.value)) {
+	} else if (/^\d+(.\d{3,})?$/.test(price.value)) {
 		alert('Up to 2 decimal values are permitted');
 		return false;
 	} else {
