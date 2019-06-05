@@ -61,7 +61,7 @@ function isNameValid(name) {
 		alert("Name should be between 3 and 50 characters");
 		return false;
 	} else if (!(/\s/.test(name.value))) { // If full name doesn't contain a space
-		alert('Missing space between first and last names');
+		alert('Missing space between first and last names.');
 		return false;
 	} else {
 		alert('Invalid name.');
