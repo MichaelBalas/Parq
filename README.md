@@ -40,11 +40,11 @@ From the results map and/or table, users are able to link to a more detailed and
 A dynamically generated page for a parking spot, with information about its location on an embedded live map, as well as a list of all reviews and ratings that have been entered by users. Logged-in users are also able to submit a review and a rating for an individual parking, which is inserted into the database and displayed for future users. 
 
 #### Logout
-![login page](example_img/login.png)
+![login page](example_img/logout.png)
 We need a way to logout so that those using the computer after us can't access private pages. Logging out clears the user data from the session and redirects the user to the login page. 
 
 #### Responsive Header/Design
-![responsive reservation page](example_img/responsive_reservation.png)
+![responsive reservation page](example_img/search_mobile.png)
 An example of how the page displays on a mobile device. All of the navigation options are now enclosed within a hamburger menu. The orientation and size of the different DOM elements have shifted to accomodate a smaller and narrower screen. 
 
 ## Cloud Infrastructure
