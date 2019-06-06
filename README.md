@@ -44,7 +44,7 @@ A dynamically generated page for a parking spot, with information about its loca
 We need a way to logout so that those using the computer after us can't access private pages. Logging out clears the user data from the session and redirects the user to the login page. 
 
 #### Responsive Header/Design
-![responsive reservation page](example_img/search_mobile.png)
+![responsive reservation page](example_img/search_mobile.png)<br />
 An example of how the page displays on a mobile device. All of the navigation options are now enclosed within a hamburger menu. The orientation and size of the different DOM elements have shifted to accomodate a smaller and narrower screen. 
 
 ## Cloud Infrastructure
